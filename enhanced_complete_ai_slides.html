@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Daily Operations: Complete Enhanced Training Deck</title>
+    <style>
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 40px;
+            box-sizing: border-box;
+            display: none;
+            background-color: white;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .slide-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.5em;
+            color: #3498db;
+            margin: 10px 0 30px 0;
+        }
+        
+        .slide-body {
+            flex: 1;
+            overflow: auto;
+            padding-right: 20px;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        
+        /* Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            z-index: 100;
+        }
+        
+        /* Content Styling */
+        .two-column {
+            display: flex;
+            gap: 40px;
+            height: 100%;
+        }
+        
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .img-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .img-container img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .icon-item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+        
+        .tool-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tool-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .example-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .example-card.monitoring {
+            border-left-color: #3498db;
+        }
+        
+        .example-card.validation {
+            border-left-color: #2ecc71;
+        }
+        
+        .example-card.reporting {
+            border-left-color: #f39c12;
+        }
+        
+        .example-card.escalation {
+            border-left-color: #e74c3c;
+        }
+        
+        .example-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .example-description {
+            margin-bottom: 8px;
+            line-height: 1.4;
+            font-size: 0.9em;
+        }
+        
+        .example-use {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            font-size: 0.85em;
+        }
+        
+        .example-tool {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 0.85em;
+        }
+        
+        .operation-tag {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .tag-monitoring { background-color: #3498db; }
+        .tag-validation { background-color: #2ecc71; }
+        .tag-reporting { background-color: #f39c12; }
+        .tag-escalation { background-color: #e74c3c; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .disclaimer {
+            font-size: 0.8em;
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        /* Cover Slide */
+        .cover-slide {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cover-slide .slide-title {
+            font-size: 3.5em;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cover-slide .slide-subtitle {
+            font-size: 1.8em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+        
+        .cover-author {
+            margin-top: 60px;
+            font-size: 1.2em;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .ai-component-section {
+            margin-bottom: 30px;
+        }
+        
+        .component-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .prompt-card {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .prompt-card em {
+            font-style: italic;
+            color: #2c3e50;
+        }
+        
+        .analogy-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .analogy-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        
+        .analogy-text {
+            color: #856404;
+            font-style: italic;
+        }
+        
+        .exercise-card {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .exercise-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 8px;
+        }
+        
+        .workshop-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .timeline-time {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 0.9em;
+        }
+        
+        .timeline-activity {
+            margin-top: 5px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide cover-slide active" id="slide-1">
+            <div class="slide-content">
+                <h1 class="slide-title">AI in Daily Operations</h1>
+                <h2 class="slide-subtitle">A Non-Developer's Guide to Operational AI Tools</h2>
+                <div class="img-container">
+                    <img src="ai_concepts_diagram.png" alt="AI Concepts Diagram" style="max-width: 70%; max-height: 300px;">
+                </div>
+                <div class="cover-author">
+                    <p>Presented by: Lalit Nayyar</p>
+                    <p>Contact: lalitnayyar@gmail.com</p>
+                </div>
+                <div class="disclaimer">
+                    <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Introduction to AI -->
+        <div class="slide" id="slide-2">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">What is Artificial Intelligence?</h2>
+                </div>
+                <div class="slide-body two-column">
+                    <div class="column">
+                        <p>Artificial Intelligence involves creating machines that can think like humans and imitate their actions. It uses various technologies to enable computers to do things that normally need human intelligence.</p>
+                        
+                        <h3>How AI Works:</h3>
+                        <ul>
+                            <li>AI learns and becomes more intelligent through practice and data</li>
+                            <li>Similar to how humans learn - gets better through experience</li>
+                            <li>Uses algorithms to learn from experiences rather than being explicitly programmed</li>
+                            <li>The more data AI systems have, the better they become at their tasks</li>
+                        </ul>
+                        
+                        <h3>AI in Everyday Life:</h3>
+                        <p>AI is already integrated into our daily routines through search engines, streaming recommendations, voice assistants, and personalized content delivery systems.</p>
+                    </div>
+                    <div class="column">
+                        <div class="img-container">
+                            <img src="VPviHEroaxk8.jpeg" alt="AI Concept Diagram">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Enhanced AI Concepts with Analogies -->
+        <div class="slide" id="slide-3">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Key AI Concepts with Real-World Analogies</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="img-container">
+                        <img src="ai_fundamental_concepts.png" alt="AI Fundamental Concepts">
+                    </div>
+                    
+                    <table>
+                        <tr>
+                            <th>AI Concept</th>
+                            <th>Real-World Analogy</th>
+                            <th>Operational Application</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Machine Learning</strong></td>
+                            <td>Like a new employee who gets better at their job through experience and feedback</td>
+                            <td>Predicts customer behavior, identifies spending patterns, forecasts demand</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Natural Language Processing</strong></td>
+                            <td>Like a multilingual translator who understands context, tone, and meaning</td>
+                            <td>Automates email responses, analyzes customer feedback, generates reports</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deep Learning</strong></td>
+                            <td>Like a specialist doctor who can spot patterns invisible to the human eye</td>
+                            <td>Detects fraud, identifies quality issues, recognizes safety violations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Computer Vision</strong></td>
+                            <td>Like a security guard who never gets tired and can watch multiple screens simultaneously</td>
+                            <td>Monitors workplace safety, tracks inventory, inspects product quality</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Expert Systems</strong></td>
+                            <td>Like a experienced consultant who follows proven decision-making frameworks</td>
+                            <td>Automates approval processes, ensures compliance, guides troubleshooting</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Neural Networks</strong></td>
+                            <td>Like a team of specialists working together, each contributing their expertise</td>
+                            <td>Complex decision-making, pattern recognition, predictive modeling</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="analogy-box">
+                        <div class="analogy-title">Think of AI as Your Digital Assistant Team:</div>
+                        <div class="analogy-text">Each AI technology is like hiring a specialist who never sleeps, never makes calculation errors, and gets better at their job every day. They handle routine tasks so you can focus on strategic decisions and creative problem-solving.</div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: AI in Daily Operations Framework -->
+        <div class="slide" id="slide-4">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI in Daily Operations Framework</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="img-container">
+                        <img src="ai_operations_workflow.png" alt="AI Operations Workflow">
+                    </div>
+                    
+                    <h3>Daily Operations = Monitoring + Validating + Reporting + Escalating</h3>
+                    
+                    <div class="icon-grid">
+                        <div class="icon-item">
+                            <img src="monitoring_icon.png" alt="Monitoring Icon">
+                            <h3>Monitoring</h3>
+                            <p>System performance tracking, KPI dashboards, and anomaly detection</p>
+                        </div>
+                        <div class="icon-item">
+                            <img src="validation_icon.png" alt="Validation Icon">
+                            <h3>Validating</h3>
+                            <p>Data quality checks, process validation, and compliance verification</p>
+                        </div>
+                        <div class="icon-item">
+                            <img src="reporting_icon.png" alt="Reporting Icon">
+                            <h3>Reporting</h3>
+                            <p>Automated report generation, analytics dashboards, and insights</p>
+                        </div>
+                        <div class="icon-item">
+                            <img src="escalation_icon.png" alt="Escalation Icon">
+                            <h3>Escalating</h3>
+                            <p>Incident response, crisis management, and alert systems</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Machine Learning Examples -->
+        <div class="slide" id="slide-5">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Machine Learning in Daily Operations</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="examples-grid">
+                        <div class="example-card monitoring">
+                            <span class="operation-tag tag-monitoring">MONITORING</span>
+                            <div class="example-title">Email Volume Prediction</div>
+                            <div class="example-description">Analyzes historical email patterns to predict busy periods and help customer service teams schedule appropriate staffing levels.</div>
+                            <div class="example-use">Practical use: Proactive staff scheduling during high-volume periods</div>
+                            <div class="example-tool">Tool: Microsoft Outlook AI Insights</div>
+                        </div>
+                        
+                        <div class="example-card monitoring">
+                            <span class="operation-tag tag-monitoring">MONITORING</span>
+                            <div class="example-title">Budget Variance Detection</div>
+                            <div class="example-description">Compares current spending patterns against historical data to identify unusual expenditures automatically.</div>
+                            <div class="example-use">Practical use: Finance teams get alerts when departments exceed normal spending</div>
+                            <div class="example-tool">Tool: QuickBooks AI, Sage Intacct</div>
+                        </div>
+                        
+                        <div class="example-card validation">
+                            <span class="operation-tag tag-validation">VALIDATION</span>
+                            <div class="example-title">Invoice Accuracy Checking</div>
+                            <div class="example-description">Learns normal invoice patterns and automatically flags duplicates, incorrect amounts, or suspicious entries.</div>
+                            <div class="example-use">Practical use: Accounting teams catch payment errors before processing</div>
+                            <div class="example-tool">Tool: AppZen, MindBridge AI</div>
+                        </div>
+                        
+                        <div class="example-card validation">
+                            <span class="operation-tag tag-validation">VALIDATION</span>
+                            <div class="example-title">Data Entry Quality Control</div>
+                            <div class="example-description">Identifies patterns in data entry errors and suggests corrections to maintain data quality.</div>
+                            <div class="example-use">Practical use: HR teams ensure employee records are complete and accurate</div>
+                            <div class="example-tool">Tool: Salesforce Einstein, HubSpot AI</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: NLP Examples -->
+        <div class="slide" id="slide-6">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Natural Language Processing (NLP) Applications</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="examples-grid">
+                        <div class="example-card monitoring">
+                            <span class="operation-tag tag-monitoring">MONITORING</span>
+                            <div class="example-title">Social Media Sentiment Tracking</div>
+                            <div class="example-description">Reads customer comments and reviews across platforms to gauge brand satisfaction and identify emerging issues.</div>
+                            <div class="example-use">Practical use: Marketing teams monitor brand reputation in real-time</div>
+                            <div class="example-tool">Tool: Hootsuite Insights, Sprout Social</div>
+                        </div>
+                        
+                        <div class="example-card monitoring">
+                            <span class="operation-tag tag-monitoring">MONITORING</span>
+                            <div class="example-title">Customer Support Ticket Classification</div>
+                            <div class="example-description">Automatically categorizes support requests by urgency, type, and required expertise for efficient routing.</div>
+                            <div class="example-use">Practical use: Support teams prioritize critical issues and route to specialists</div>
+                            <div class="example-tool">Tool: Zendesk AI, Freshdesk Freddy</div>
+                        </div>
+                        
+                        <div class="example-card reporting">
+                            <span class="operation-tag tag-reporting">REPORTING</span>
+                            <div class="example-title">Meeting Summary Generation</div>
+                            <div class="example-description">Converts recorded meetings into structured summaries with action items, decisions, and key discussion points.</div>
+                            <div class="example-use">Practical use: Project managers get instant meeting notes without manual transcription</div>
+                            <div class="example-tool">Tool: Otter.ai, Microsoft Teams AI</div>
+                        </div>
+                        
+                        <div class="example-card reporting">
+                            <span class="operation-tag tag-reporting">REPORTING</span>
+                            <div class="example-title">Contract Analysis</div>
+                            <div class="example-description">Reads contracts and extracts key terms, dates, and obligations for quick review and compliance.</div>
+                            <div class="example-use">Practical use: Legal teams quickly review vendor agreements for important clauses</div>
+                            <div class="example-tool">Tool: Kira Systems, LawGeex</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Deep Learning & Computer Vision -->
+        <div class="slide" id="slide-7">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Deep Learning & Computer Vision Applications</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="examples-grid">
+                        <div class="example-card validation">
+                            <span class="operation-tag tag-validation">VALIDATION</span>
+                            <div class="example-title">Document Authenticity Verification</div>
+                            <div class="example-description">Analyzes document images to detect forgeries, alterations, or inconsistencies in official documents.</div>
+                            <div class="example-use">Practical use: HR teams verify employment documents and certificates</div>
+                            <div class="example-tool">Tool: Jumio, Onfido</div>
+                        </div>
+                        
+                        <div class="example-card escalation">
+                            <span class="operation-tag tag-escalation">ESCALATION</span>
+                            <div class="example-title">Fraud Detection</div>
+                            <div class="example-description">Analyzes transaction patterns and behaviors to identify potentially fraudulent activities in real-time.</div>
+                            <div class="example-use">Practical use: Finance teams get immediate alerts for suspicious transactions</div>
+                            <div class="example-tool">Tool: Featurespace ARIC, SAS Fraud Management</div>
+                        </div>
+                        
+                        <div class="example-card monitoring">
+                            <span class="operation-tag tag-monitoring">MONITORING</span>
+                            <div class="example-title">Workplace Safety Monitoring</div>
+                            <div class="example-description">Watches video feeds to ensure employees wear required safety equipment and follow safety protocols.</div>
+                            <div class="example-use">Practical use: Safety managers get alerts when workers enter hazardous areas</div>
+                            <div class="example-tool">Tool: Smartvid.io, Vintra</div>
+                        </div>
+                        
+                        <div class="example-card validation">
+                            <span class="operation-tag tag-validation">VALIDATION</span>
+                            <div class="example-title">ID Verification</div>
+                            <div class="example-description">Compares photo identification documents with live images to confirm identity and detect fraudulent documents.</div>
+                            <div class="example-use">Practical use: Security teams verify visitor identities at building entrances</div>
+                            <div class="example-tool">Tool: FaceFirst, Kairos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: AI Tools for Monitoring -->
+        <div class="slide" id="slide-8">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI Tools for Monitoring Operations</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="tool-card">
+                        <h3>ThoughtSpot</h3>
+                        <p>AI-powered analytics with natural language search and interactive visualizations. Automatically identifies anomalies and provides predictive insights.</p>
+                        <p><strong>Use case:</strong> Real-time KPI tracking and performance monitoring dashboards</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>PagerDuty AIOps</h3>
+                        <p>Proactive incident detection and real-time response system that helps teams achieve fewer incidents and faster resolution.</p>
+                        <p><strong>Use case:</strong> System health monitoring and automated alerting</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>NotebookLM</h3>
+                        <p>AI research tool that analyzes uploaded sources, summarizes content, and makes connections between topics with clear citations.</p>
+                        <p><strong>Use case:</strong> Research synthesis and operational documentation analysis</p>
+                    </div>
+                    
+                    <div class="prompt-card">
+                        <h4>ChatGPT Prompt for Monitoring:</h4>
+                        <p><em>"Analyze my system performance data and identify patterns, anomalies, and potential issues. Create a monitoring dashboard with key metrics and alert thresholds for [specific system/process]."</em></p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 9: AI Tools for Validation -->
+        <div class="slide" id="slide-9">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI Tools for Validation Operations</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="tool-card">
+                        <h3>Datameer</h3>
+                        <p>Automated data validation and quality management platform that ensures data accuracy and consistency across systems.</p>
+                        <p><strong>Use case:</strong> Data quality validation and governance workflows</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Informatica</h3>
+                        <p>Enterprise data validation and governance platform with AI-powered data quality rules and automated error detection.</p>
+                        <p><strong>Use case:</strong> Comprehensive data validation across enterprise systems</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Alteryx</h3>
+                        <p>Self-service data analytics platform with built-in validation capabilities and automated quality checks.</p>
+                        <p><strong>Use case:</strong> Data preparation and validation for business users</p>
+                    </div>
+                    
+                    <div class="prompt-card">
+                        <h4>ChatGPT Prompt for Validation:</h4>
+                        <p><em>"Create a data validation framework for [specific data type]. Include quality checks, error detection methods, validation rules, and automated testing procedures."</em></p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 10: AI Tools for Reporting -->
+        <div class="slide" id="slide-10">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI Tools for Reporting Operations</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="tool-card">
+                        <h3>Domo</h3>
+                        <p>AI-powered business intelligence platform that transforms data into actionable insights with automated report generation.</p>
+                        <p><strong>Use case:</strong> Executive dashboards and automated business reporting</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Tableau</h3>
+                        <p>Advanced data visualization platform with AI-driven insights, automated analytics, and natural language queries.</p>
+                        <p><strong>Use case:</strong> Interactive data visualization and self-service reporting</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Microsoft Copilot</h3>
+                        <p>Integrated across Microsoft 365 suite to automate document creation, email management, and meeting summaries.</p>
+                        <p><strong>Use case:</strong> Automated report generation within Office applications</p>
+                    </div>
+                    
+                    <div class="prompt-card">
+                        <h4>ChatGPT Prompt for Reporting:</h4>
+                        <p><em>"Create a structured report template for [department/function]. Include key metrics, analysis sections, executive summary, and actionable insights with data visualization recommendations."</em></p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 11: AI Tools for Escalation -->
+        <div class="slide" id="slide-11">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI Tools for Escalation Operations</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="tool-card">
+                        <h3>incident.io</h3>
+                        <p>All-in-one AI platform for incident response, on-call management, and status pages with intelligent escalation workflows.</p>
+                        <p><strong>Use case:</strong> Comprehensive incident management and response coordination</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Zenduty</h3>
+                        <p>AI-driven incident management platform with intelligent alerting and automation to reduce alert fatigue and improve response times.</p>
+                        <p><strong>Use case:</strong> Automated escalation workflows and intelligent alert routing</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Omnilert</h3>
+                        <p>AI security systems and emergency communications platform for critical alerts and mass notification scenarios.</p>
+                        <p><strong>Use case:</strong> Emergency notification and crisis communication management</p>
+                    </div>
+                    
+                    <div class="prompt-card">
+                        <h4>ChatGPT Prompt for Escalation:</h4>
+                        <p><em>"Create an incident escalation matrix with clear triggers, responsible parties, communication protocols, and automated response procedures for [specific incident type]."</em></p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 12: Implementation Strategy -->
+        <div class="slide" id="slide-12">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Implementation Strategy for Non-Developers</h2>
+                </div>
+                <div class="slide-body">
+                    <table>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Timeline</th>
+                            <th>Focus Areas</th>
+                            <th>Expected Outcomes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Foundation</strong></td>
+                            <td>Weeks 1-4</td>
+                            <td>Start with ChatGPT for email drafting, NotebookLM for research, Microsoft Copilot for Office tasks</td>
+                            <td>20-30% time savings on routine communication and documentation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Automation</strong></td>
+                            <td>Weeks 5-12</td>
+                            <td>Implement workflow automation with Zapier AI, deploy monitoring tools like ThoughtSpot</td>
+                            <td>Reduced manual errors, improved response times</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration</strong></td>
+                            <td>Months 4-6</td>
+                            <td>Add specialized tools for validation, escalation, and advanced reporting</td>
+                            <td>Comprehensive AI-enhanced operations across all areas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Optimization</strong></td>
+                            <td>Months 7-12</td>
+                            <td>Fine-tune systems, expand adoption, develop custom solutions</td>
+                            <td>Measurable ROI, improved operational efficiency</td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Success Metrics to Track:</h3>
+                    <ul>
+                        <li><strong>Time Savings:</strong> Hours saved on routine tasks</li>
+                        <li><strong>Error Reduction:</strong> Decrease in manual processing errors</li>
+                        <li><strong>Response Speed:</strong> Faster incident resolution times</li>
+                        <li><strong>Cost Efficiency:</strong> Operational cost reductions</li>
+                    </ul>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 13: Benefits and ROI -->
+        <div class="slide" id="slide-13">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Benefits and Return on Investment</h2>
+                </div>
+                <div class="slide-body two-column">
+                    <div class="column">
+                        <h3>Quantifiable Benefits:</h3>
+                        <ul>
+                            <li><strong>Efficiency Gains:</strong> 30-50% reduction in routine task time</li>
+                            <li><strong>Error Reduction:</strong> 70-90% decrease in manual processing errors</li>
+                            <li><strong>Response Time:</strong> 60-80% faster incident resolution</li>
+                            <li><strong>Cost Savings:</strong> 20-40% reduction in operational costs</li>
+                        </ul>
+                        
+                        <h3>Qualitative Improvements:</h3>
+                        <ul>
+                            <li>Enhanced decision-making with data-driven insights</li>
+                            <li>Improved customer experience and satisfaction</li>
+                            <li>Better employee satisfaction through automation of repetitive tasks</li>
+                            <li>Increased competitive advantage and market responsiveness</li>
+                        </ul>
+                        
+                        <h3>Risk Mitigation:</h3>
+                        <ul>
+                            <li>Proactive issue identification and prevention</li>
+                            <li>Improved compliance and audit readiness</li>
+                            <li>Enhanced security through automated threat detection</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="img-container">
+                            <img src="VQiqOoNSdzQx.jpg" alt="AI Benefits Infographic">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 14: Getting Started Guide -->
+        <div class="slide" id="slide-14">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Getting Started: Your First Steps</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="ai-component-section">
+                        <h3 class="component-title">Week 1: Foundation Setup</h3>
+                        <div class="tool-card">
+                            <h4>1. Create ChatGPT Account</h4>
+                            <p>Start with basic prompts for email drafting, meeting summaries, and report writing. Practice with simple operational tasks.</p>
+                        </div>
+                        <div class="tool-card">
+                            <h4>2. Set Up NotebookLM</h4>
+                            <p>Upload your standard operating procedures, policy documents, and training materials for AI-powered research and analysis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-component-section">
+                        <h3 class="component-title">Week 2-4: Expand Usage</h3>
+                        <div class="tool-card">
+                            <h4>3. Implement Microsoft Copilot</h4>
+                            <p>If using Office 365, activate Copilot for automated document creation, email management, and meeting assistance.</p>
+                        </div>
+                        <div class="tool-card">
+                            <h4>4. Identify Pain Points</h4>
+                            <p>Document current operational challenges and match them with appropriate AI solutions from this presentation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="prompt-card">
+                        <h4>Starter Prompts to Try:</h4>
+                        <p><em>"Summarize this meeting transcript and extract action items with responsible parties and deadlines."</em></p>
+                        <p><em>"Analyze this data set and identify the top 3 trends with potential business impact."</em></p>
+                        <p><em>"Create a professional email response to this customer inquiry maintaining our company tone."</em></p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW SLIDE 15: Practical AI Training Exercises -->
+        <div class="slide" id="slide-15">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Practical AI Training Exercises</h2>
+                </div>
+                <div class="slide-body">
+                    <h3>Hands-On Learning Approach</h3>
+                    <p>Our training program includes structured exercises designed to build practical AI implementation skills through real-world scenarios.</p>
+                    
+                    <div class="examples-grid">
+                        <div class="exercise-card">
+                            <div class="exercise-title">Foundation Exercises (Week 1)</div>
+                            <p><strong>Grammarly Business:</strong> Transform project delay email communication</p>
+                            <p><strong>Otter.ai:</strong> Automate budget review meeting documentation</p>
+                            <p><strong>Zapier AI:</strong> Create lead management workflow automation</p>
+                            <p><strong>Microsoft Copilot:</strong> Generate monthly performance reports</p>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <div class="exercise-title">Intermediate Exercises (Weeks 2-4)</div>
+                            <p><strong>Obviously AI:</strong> Build customer churn prediction model</p>
+                            <p><strong>Notion AI:</strong> Create employee onboarding knowledge base</p>
+                            <p><strong>Tableau Ask Data:</strong> Build interactive sales dashboard</p>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <div class="exercise-title">Advanced Exercises (Months 2-3)</div>
+                            <p><strong>Lindy.ai:</strong> Develop customer service AI agent</p>
+                            <p><strong>Akkio:</strong> Create sales analytics chatbot</p>
+                            <p><strong>docAnalyzer.ai:</strong> Automate invoice processing workflow</p>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <div class="exercise-title">Specialized Scenarios</div>
+                            <p><strong>Google Teachable Machine:</strong> Implement visual quality control</p>
+                            <p><strong>Intercom:</strong> Deploy customer support automation</p>
+                            <p><strong>Custom Integration:</strong> Build department-specific solutions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="analogy-box">
+                        <div class="analogy-title">Exercise Success Metrics:</div>
+                        <div class="analogy-text">Each exercise includes specific success criteria: 40-70% time savings, 80-95% accuracy improvements, and measurable ROI within 30 days of implementation.</div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW SLIDE 16: AI Tool Training Workshop -->
+        <div class="slide" id="slide-16">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI Tool Training Workshop</h2>
+                </div>
+                <div class="slide-body">
+                    <h3>2-Day Intensive Hands-On Workshop</h3>
+                    
+                    <div class="workshop-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">Day 1 Morning</div>
+                            <div class="timeline-activity">AI Fundamentals & Communication Tools</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">Day 1 Afternoon</div>
+                            <div class="timeline-activity">Workflow Automation & Office Integration</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">Day 2 Morning</div>
+                            <div class="timeline-activity">Predictive Analytics & Knowledge Management</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">Day 2 Afternoon</div>
+                            <div class="timeline-activity">Advanced AI & Implementation Planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="two-column">
+                        <div class="column">
+                            <h4>Workshop Features:</h4>
+                            <ul>
+                                <li><strong>Live Demonstrations:</strong> Real-time tool usage with business scenarios</li>
+                                <li><strong>Hands-On Exercises:</strong> Participants work with actual tools and data</li>
+                                <li><strong>Group Activities:</strong> Collaborative problem-solving and peer learning</li>
+                                <li><strong>Individual Projects:</strong> Personalized implementation planning</li>
+                            </ul>
+                            
+                            <h4>Workshop Outcomes:</h4>
+                            <ul>
+                                <li>Practical proficiency in 8+ AI tools</li>
+                                <li>Completed automation workflows</li>
+                                <li>Personal 90-day implementation roadmap</li>
+                                <li>Peer accountability partnerships</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Pre-Workshop Preparation:</h4>
+                            <div class="tool-card">
+                                <p><strong>Account Setup:</strong> ChatGPT, Grammarly, Otter.ai, Zapier</p>
+                                <p><strong>Data Preparation:</strong> Sample datasets for exercises</p>
+                                <p><strong>Technical Check:</strong> Browser extensions and connectivity</p>
+                            </div>
+                            
+                            <h4>Post-Workshop Support:</h4>
+                            <div class="tool-card">
+                                <p><strong>Week 1:</strong> Daily 15-minute office hours</p>
+                                <p><strong>Weeks 2-4:</strong> Weekly skill development sessions</p>
+                                <p><strong>Months 2-3:</strong> Monthly progress assessments</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW SLIDE 17: AI Tool Exercise Quick Reference -->
+        <div class="slide" id="slide-17">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">AI Tool Exercise Quick Reference</h2>
+                </div>
+                <div class="slide-body">
+                    <h3>Ready-to-Use Exercise Cards with LinkedIn Learning Courses</h3>
+                    
+                    <table>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Exercise</th>
+                            <th>Time</th>
+                            <th>Difficulty</th>
+                            <th>Success Criteria</th>
+                            <th>LinkedIn Learning Course</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Grammarly</strong></td>
+                            <td>Project delay email enhancement</td>
+                            <td>20 min</td>
+                            <td>Beginner</td>
+                            <td>Flesch-Kincaid score >60, professional tone</td>
+                            <td><a href="https://www.linkedin.com/learning/grammarly-your-ai-writing-partner" target="_blank">Grammarly: Your AI Writing Partner</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Otter.ai</strong></td>
+                            <td>Budget review meeting documentation</td>
+                            <td>30 min</td>
+                            <td>Beginner</td>
+                            <td>95% transcription accuracy, all action items captured</td>
+                            <td><a href="https://www.linkedin.com/learning/using-ai-to-generate-business-analysis-deliverables" target="_blank">Using AI to Generate Business Analysis Deliverables</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zapier AI</strong></td>
+                            <td>Lead management workflow automation</td>
+                            <td>45 min</td>
+                            <td>Beginner</td>
+                            <td>100% automation reliability, zero data errors</td>
+                            <td><a href="https://www.linkedin.com/learning/automate-and-innovate-with-chat-gpt-ai-agents-and-zapier" target="_blank">Automate and Innovate with ChatGPT AI Agents and Zapier</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Obviously AI</strong></td>
+                            <td>Customer churn prediction model</td>
+                            <td>60 min</td>
+                            <td>Intermediate</td>
+                            <td>80%+ model accuracy, actionable insights</td>
+                            <td><a href="https://www.linkedin.com/learning/artificial-intelligence-foundations-machine-learning-22345868" target="_blank">AI Foundations: Machine Learning</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Notion AI</strong></td>
+                            <td>Employee onboarding system</td>
+                            <td>45 min</td>
+                            <td>Intermediate</td>
+                            <td>20+ item checklist, automated tracking</td>
+                            <td><a href="https://www.linkedin.com/learning/notion-ai-your-new-productivity-partner" target="_blank">Notion AI: Your New Productivity Partner</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lindy.ai</strong></td>
+                            <td>Customer service agent development</td>
+                            <td>75 min</td>
+                            <td>Advanced</td>
+                            <td>80% first-contact resolution, <30s response</td>
+                            <td><a href="https://www.linkedin.com/learning/how-to-boost-your-productivity-with-ai-tools-26974255" target="_blank">How to Boost Your Productivity with AI Tools</a></td>
+                        </tr>
+                    </table>
+                    
+                    <div class="examples-grid">
+                        <div class="exercise-card">
+                            <div class="exercise-title">Beginner Level (Cards 1-3)</div>
+                            <p>Focus on immediate productivity improvements with minimal setup complexity. Quick wins and visible results build confidence.</p>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <div class="exercise-title">Intermediate Level (Cards 4-6)</div>
+                            <p>Introduce analytical thinking and process optimization. Learn to leverage AI for decision-making and knowledge management.</p>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <div class="exercise-title">Advanced Level (Cards 7-10)</div>
+                            <p>Require strategic thinking and system integration. Develop capabilities for custom AI solution development and deployment.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Additional LinkedIn Learning Resources:</h3>
+                    <div class="tool-card">
+                        <h4>Foundational AI Courses:</h4>
+                        <ul>
+                            <li><a href="https://www.linkedin.com/learning/paths/build-your-generative-ai-productivity-skills-with-microsoft-and-linkedin" target="_blank">Build Your Generative AI Productivity Skills</a></li>
+                            <li><a href="https://www.linkedin.com/learning/introduction-to-generative-ai-with-gpt" target="_blank">Introduction to Generative AI with GPT</a></li>
+                            <li><a href="https://www.linkedin.com/learning/paths/linkedin-s-ai-academy" target="_blank">LinkedIn's AI Academy Learning Path</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h4>Business Automation Courses:</h4>
+                        <ul>
+                            <li><a href="https://www.linkedin.com/learning/microsoft-power-automate-advanced-business-automation-2022" target="_blank">Microsoft Power Automate: Advanced Business Automation</a></li>
+                            <li><a href="https://www.linkedin.com/learning/generative-ai-tools-for-productivity-and-research" target="_blank">Generative AI Tools for Productivity and Research</a></li>
+                            <li><a href="https://www.linkedin.com/learning/learning-ai-for-business-analysis" target="_blank">Learning AI for Business Analysis</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 18: Conclusion and Next Steps -->
+        <div class="slide" id="slide-18">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title">Conclusion and Next Steps</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="two-column">
+                        <div class="column">
+                            <h3>Key Takeaways:</h3>
+                            <ul>
+                                <li>AI is already transforming daily operations across all industries</li>
+                                <li>Non-developers can successfully implement AI tools with proper guidance</li>
+                                <li>Start small with familiar tools like ChatGPT and NotebookLM</li>
+                                <li>Focus on solving specific operational pain points</li>
+                                <li>Measure success through time savings and error reduction</li>
+                            </ul>
+                            
+                            <h3>Immediate Action Items:</h3>
+                            <ol>
+                                <li>Identify your top 3 operational challenges</li>
+                                <li>Select appropriate AI tools from this presentation</li>
+                                <li>Start with one tool and expand gradually</li>
+                                <li>Track metrics to measure improvement</li>
+                                <li>Share learnings with your team</li>
+                            </ol>
+                        </div>
+                        <div class="column">
+                            <h3>Training Resources Available:</h3>
+                            <div class="tool-card">
+                                <h4>Comprehensive Training Package:</h4>
+                                <ul>
+                                    <li>Detailed exercise guides with step-by-step instructions</li>
+                                    <li>2-day workshop agenda with hands-on activities</li>
+                                    <li>Quick reference cards for immediate implementation</li>
+                                    <li>Post-training support and accountability system</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="tool-card">
+                                <h4>Contact Information:</h4>
+                                <p><strong>Presenter:</strong> Lalit Nayyar</p>
+                                <p><strong>Email:</strong> lalitnayyar@gmail.com</p>
+                                <p>Feel free to reach out for questions, implementation guidance, or additional training sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="disclaimer">
+                        <p>Disclaimer: This presentation is for educational purposes only. All content is property of Lalit Nayyar (lalitnayyar@gmail.com).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Controls -->
+        <div class="nav-controls">
+            <button class="nav-btn" id="prev-btn">←</button>
+            <button class="nav-btn" id="next-btn">→</button>
+        </div>
+        
+        <!-- Slide Counter -->
+        <div class="slide-counter" id="slide-counter">1 / 18</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[index].classList.add('active');
+                
+                // Update navigation buttons
+                prevBtn.style.display = index === 0 ? 'none' : 'flex';
+                nextBtn.style.display = index === slides.length - 1 ? 'none' : 'flex';
+                
+                // Update slide counter
+                slideCounter.textContent = `${index + 1} / ${slides.length}`;
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    if (currentSlide < slides.length - 1) {
+                        currentSlide++;
+                        showSlide(currentSlide);
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        showSlide(currentSlide);
+                    }
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    currentSlide = slides.length - 1;
+                    showSlide(currentSlide);
+                }
+            });
+            
+            // Initialize
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
